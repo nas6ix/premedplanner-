@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,6 +78,20 @@
   .upload-btn:hover{background:#e1e6f0;}
   .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--teal);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px;}
   @keyframes spin{to{transform:rotate(360deg);}}
+  .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-scroll table{min-width:480px;}
+
+  @media(max-width:640px){
+    header{padding:18px 16px;}
+    header h1{font-size:20px;}
+    header p{font-size:13px;}
+    main{padding:16px 12px 40px;}
+    nav{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    nav button{flex:none;min-width:auto;padding:13px 14px;font-size:13px;white-space:nowrap;}
+    .card{padding:16px 14px;}
+    .stat{min-width:100px;padding:10px;}
+    .stat .num{font-size:21px;}
+  }
 </style>
 </head>
 <body>
@@ -175,10 +190,10 @@
     <div class="card">
       <div class="toprow"><h2 style="margin:0;">GPA Summary</h2></div>
       <div class="stat-row" id="gpaStats"></div>
-      <table id="courseTable">
+      <div class="table-scroll"><table id="courseTable">
         <thead><tr><th>Course</th><th>Category</th><th>Credits</th><th>Term</th><th>Grade</th><th>Status</th><th></th></tr></thead>
         <tbody id="courseBody"></tbody>
-      </table>
+      </table></div>
       <p class="muted" id="noCoursesMsg">No courses added yet.</p>
     </div>
 
@@ -221,7 +236,7 @@
     </div>
     <div class="card">
       <h2>Study Resources</h2>
-      <table>
+      <div class="table-scroll"><table>
         <thead><tr><th>Resource</th><th>Best For</th></tr></thead>
         <tbody>
           <tr><td><b>AAMC Official Prep</b> (Question Packs, Section Bank, Sample Test, 3 Full-Lengths)</td><td>Most representative of the real exam — always include this</td></tr>
@@ -232,15 +247,15 @@
           <tr><td><b>Anki</b> — AnKing MCAT deck / Miledown</td><td>Long-term retention of content via spaced repetition</td></tr>
           <tr><td><b>r/Mcat &amp; Student Doctor Network</b></td><td>Community advice — cross-check anything you read there</td></tr>
         </tbody>
-      </table>
+      </table></div>
     </div>
     <div class="card">
       <h2>Recommended Prep Books &amp; Resources</h2>
       <p class="muted">Disclosure: some links below are affiliate links. If you buy through them, this page may earn a small commission at no extra cost to you.</p>
-      <table>
+      <div class="table-scroll"><table>
         <thead><tr><th>Resource</th><th>Where to Get It</th></tr></thead>
         <tbody id="bookLinksBody"></tbody>
-      </table>
+      </table></div>
     </div>
     <div class="card">
       <h2>Sample 12-Week Study Schedule</h2>
@@ -261,7 +276,7 @@
     </div>
     <div class="card">
       <h2>MD School GPA / MCAT Tiers</h2>
-      <table class="bench-table">
+      <div class="table-scroll"><table class="bench-table">
         <thead><tr><th>Tier</th><th>Typical cGPA</th><th>Typical MCAT</th></tr></thead>
         <tbody>
           <tr><td>Most selective MD (top ~10–15 research-heavy programs)</td><td class="gpa">3.90–3.95+</td><td class="mcat">519–521</td></tr>
@@ -269,16 +284,16 @@
           <tr><td>Average U.S. MD matriculant (AAMC national average)</td><td class="gpa">~3.75</td><td class="mcat">~511–512</td></tr>
           <tr><td>Mission-driven / primary-care / state MD schools</td><td class="gpa">3.60–3.75</td><td class="mcat">505–510</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <h2 style="margin-top:22px;">DO School GPA / MCAT Tiers</h2>
-      <table class="bench-table">
+      <div class="table-scroll"><table class="bench-table">
         <thead><tr><th>Tier</th><th>Typical cGPA</th><th>Typical MCAT</th></tr></thead>
         <tbody>
           <tr><td>Competitive DO programs</td><td class="gpa">3.70+</td><td class="mcat">508–511</td></tr>
           <tr><td>Average DO matriculant (AACOMAS national average)</td><td class="gpa">3.50–3.60</td><td class="mcat">503–506</td></tr>
           <tr><td>Access-friendly / newer DO programs</td><td class="gpa">3.40–3.50</td><td class="mcat">499–503</td></tr>
         </tbody>
-      </table>
+      </table></div>
       <div class="warning-box" style="margin-top:14px;">These are approximate, publicly-known ranges for general planning — they shift year to year and school to school. Before applying, verify current numbers for specific schools in AAMC's MSAR and AACOMAS's College Information Book.</div>
     </div>
   </div>
@@ -660,7 +675,7 @@ function renderParsePreview(){
   const div = document.getElementById('parsePreview');
   div.innerHTML = `
     <p class="muted">${parsedRows.length} row(s) detected. Unchecked rows look less certain — review and check the box to include them. Edit any field before adding.</p>
-    <table>
+    <div class="table-scroll"><table>
       <thead><tr><th></th><th>Course Name</th><th>Category</th><th>Maps To Prereq</th><th>Credits</th><th>Term</th><th>Grade</th></tr></thead>
       <tbody>
       ${parsedRows.map((r,i)=>`
@@ -675,7 +690,7 @@ function renderParsePreview(){
         </tr>
       `).join('')}
       </tbody>
-    </table>
+    </table></div>
     <div class="actions-row"><button class="btn" onclick="commitParsedRows()">Add Checked Rows to My Classes</button></div>
   `;
 }
@@ -970,3 +985,4 @@ initAll();
 </script>
 </body>
 </html>
+
